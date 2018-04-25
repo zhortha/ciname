@@ -57,6 +57,7 @@
 						</li>
 					  <li class="active"><a href="<?php echo site_url('home/m_blog');?>">Blog</a></li>
 					  <li class="active"><a href="<?php echo site_url('home/tampil');?>">list</a></li>
+					  <li class="active"><a href="<?php echo site_url('kategori');?>">Kategori</a></li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>
