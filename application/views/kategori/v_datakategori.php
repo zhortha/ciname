@@ -10,7 +10,7 @@
                     <th>No</th>
                     <th>ID</th>
                     <th>Nama kategori</th>
-                    <th>discription/th>
+                    <th>discription</th>
                     <th>date</th>
                     <th>aksi</th>
                 </thead>
@@ -27,7 +27,7 @@
                         <td><?php echo $row->date_created;?></td>
                         <td>
                             <a class="btn btn-warning" href="<?php echo base_url('index.php/kategori/edit/'.$row->cat_id);?>">edit</a>
-                            <a  class="btn btn-danger" href="<?php echo base_url('index.php/kategori/hapuspproses/'.$row->cat_id);?>">delete</a>
+                            <a  class="btn btn-danger" href="<?php echo base_url('index.php/kategori/hapusproses/'.$row->cat_id);?>">delete</a>
                    </tr>
                 </td>
             </div>

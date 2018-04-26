@@ -26,24 +26,25 @@ class Kategori extends CI_Controller {
 		$data['menu']		='menu.php';
 		$data['content']	='kategori/v_editkategori.php';
 		$data['data']		=$this->m_kategori->cekid($id)->row_array();
-		$this->load->view('v_home.php',$data);
+		$this->load->view('kategori/v_editkategori.php',$data);
 
 	}
 
 	public function editproses($id)
 	{
-		$nama_kategori=$this->input->post('nama_kategori');
-		$lokasi=$this->input->post('lokasi');  
-
-
+		$cat_id=$this->input->post('cat_id');
+		$cat_name=$this->input->post('cat_name');
+		$cat_description=$this->input->post('cat_description'); 
+		$date_created=$this->input->post('date_created'); 
+							
 			$info=array(
-				'id_kategori'=>$id,
-				'nama_kategori'=>$nama_kategori,
-				'lokasi'=>$lokasi,
+				'cat_id'=>$cat_id,
+				'cat_name'=>$cat_name,
+				'cat_description'=>$cat_description,
+				'date_created'=>$date_created,
 			);
-			$this->m_kategori->getupdate($info, $id);
+			$this->m_kategori->getupdate($info,$id);
 			redirect('kategori');
-	
 	}
 
 	public function simpan()
@@ -73,7 +74,7 @@ public function Hapus($id)
 		$data['menu']		='menu.php';
 		$data['content']	='kategori/v_hapuskategori.php';
 		$data['data']		=$this->m_kategori->cekid($id)->row_array();
-		$this->load->view('v_home.php',$data);
+		$this->load->view('kategori/v_hapuskategori.php',$data);
 
 	}
 	public function hapusproses($id)
