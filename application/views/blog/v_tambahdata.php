@@ -20,6 +20,14 @@
 					<label>Content</label>
 						<textarea class="form-control" rows="3" name="content" placeholder="Content" required="required"></textarea>
 
+					<label>Kategori</label>
+						<?php $cat=$this->db->select('cat_name, cat_id')->get('categories');?> 
+						<select class="form-control" name="cat_name" required>
+							<?php foreach ($cat->result() as $key) { ?>
+								<option value="<?=$key->cat_id?>"><?=$key->cat_name?></option>
+								
+							<?php } ?>
+						</select>
 					<label>Image File</label>
 						<input type="file" name="image_file" placeholder="Image File">
 					<br><button href="<?php echo base_url('home/m_blog');?>" type="submit" class="btn btn-primary">Tambah Data</button>

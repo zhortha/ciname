@@ -16,7 +16,7 @@ class M_Blog extends CI_Model
 
 	public function getByID($id)
 	{
-		return $this->db->query(" SELECT * from blog where id='".$id."'")->row();
+		return $this->db->query(" SELECT a.author, a.tittle, a.content, a.image_file, b.cat_name, b.cat_description from blog AS a join categories AS b on a.cat_id = b.cat_id where id='".$id."'")->row();
 	}
 
 	public function cekid($id)

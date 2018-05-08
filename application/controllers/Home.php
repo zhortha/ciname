@@ -67,6 +67,7 @@ class Home extends CI_Controller {
 		$date=$this->input->post('date'); 
 		$tittle=$this->input->post('tittle'); 
 		$content=$this->input->post('content'); 
+		$cat_name=$this->input->post('cat_name'); 
 		$image_file=$_FILES['image_file']['name'];
 		
 		if($image_file=''){}else {
@@ -88,6 +89,7 @@ class Home extends CI_Controller {
 				'date' => $date,
 				'tittle' => $tittle,
 				'content' => $content,
+				'cat_id' => $cat_name,
 				'image_file'=>$image_file);
 
 			$this->m_blog->getinsert($data, 'blog');
@@ -128,6 +130,7 @@ class Home extends CI_Controller {
 		$author = $this->input->post('author');
 		$date = $this->input->post('date');
 		$content = $this->input->post('content');
+		$cat_name = $this->input->post('cat_name');
 		$image_file = $_FILES['image_file']['name'];
 
 			$data = array(
@@ -136,6 +139,7 @@ class Home extends CI_Controller {
 				'author' =>$author,
 				'date' => $date,
 				'content' => $content,
+				'cat_id' => $cat_name,
 				'image_file'=>$image_file);
 
 			$this->blog->update($data);

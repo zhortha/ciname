@@ -14,6 +14,8 @@
 				        </div>
 				        <div class="panel-footer"><?php echo $naruto->author; ?></div>
 				        <div class="panel-footer"><?php echo $naruto->content; ?></div>
+				        <div class="panel-footer"><?php echo $naruto->cat_name; ?></div>
+				        <div class="panel-footer"><?php echo $naruto->cat_description; ?></div>
 		      		</div>
 		    	</div>
 			</div>

@@ -9,6 +9,11 @@ public function __construct()
 {
 	parent::__construct();
 }
+
+public function getkategorilist($limit, $start){
+        $query = $this->db->get('categories', $limit, $start);
+        return $query;
+    }
 public function getdatakategori($key)
  {
  	$k=$this->db->query("select*from categories where cat_id ='$key'");
@@ -26,7 +31,7 @@ public function cekid($id)
  	return $k;
  	
  }
- function getupdate($info, $id){
+public function getupdate($info, $id){
         $this->db->where($this->primary, $id);
 		$this->db->update($this->table, $info);
     }
@@ -34,4 +39,5 @@ public function hapus($id){
         $this->db->where($this->primary, $id);
 		$this->db->delete($this->table);
     }
+
 }

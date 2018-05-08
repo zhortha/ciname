@@ -10,6 +10,7 @@ class Kategori extends CI_Controller {
 
 	public function index()
 	{
+		
 		$data['header']='header.php';
 		$data['data']  =$this->db->get('categories');
 		$this->load->view('kategori/v_datakategori',$data);
