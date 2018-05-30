@@ -42,7 +42,7 @@ class M_Blog extends CI_Model
 		{
 		$this->db->query("update blog set 
 			author='".$data['author']."', date=".$data['date'].",
-			title='".$data['title']."', content='".$data['content']."',
+			tittle='".$data['tittle']."', content='".$data['content']."',
 			image_file='".$data['image_file']."' where id = '".$data['id']."'");
 		}
 }

@@ -8,8 +8,14 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('m_blog');
+		$this->load->model('m_users');
 	}
 	public function index()
+	{
+		$data['header']='header.php';
+		$this->load->view('v_login',$data);
+	}
+		public function index1()
 	{
 		$this->load->model('M_biodata');
 		$data['header']='header.php';
@@ -19,7 +25,6 @@ class Home extends CI_Controller {
 		$data['biodatabuilder_object']=$this->M_biodata->getBiodataBuilderObject();
 		$this->load->view('v_home',$data);
 	}
-
 		public function tampil()
 	{
 		$data['header']='header.php';
@@ -118,23 +123,22 @@ class Home extends CI_Controller {
 	// }
 	public function formEdit(){
 		$id = $this->input->post('id');
-		$data['key'] = $this->blog->getByID($id);
+		$data['key'] = $this->m_blog->getByID($id);
 		$this->load->helper('form');
-		$this->load->view('blog/v_editblog', $data);
+		$this->load->view('blog/v_editblog.php ', $data);
 	}
 
-	public function edit()
+	public function edit($id)
 	{
-		$id = $this->input->post('id');
-		$tittle = $this->input->post('tittle');
-		$author = $this->input->post('author');
-		$date = $this->input->post('date');
-		$content = $this->input->post('content');
-		$cat_name = $this->input->post('cat_name');
-		$image_file = $_FILES['image_file']['name'];
+		
+		$author=$this->input->post('author'); 
+		$date=$this->input->post('date'); 
+		$tittle=$this->input->post('tittle'); 
+		$content=$this->input->post('content'); 
+		$cat_name=$this->input->post('cat_name'); 
+		$image_file=$_FILES['image_file']['name'];
 
 			$data = array(
-				'id' => $id,
 				'tittle' => $tittle,
 				'author' =>$author,
 				'date' => $date,
@@ -142,9 +146,94 @@ class Home extends CI_Controller {
 				'cat_id' => $cat_name,
 				'image_file'=>$image_file);
 
-			$this->blog->update($data);
+			$this->m_blog->getupdate($data);
 			unlink('assets/path/'.$image_file);
 			redirect('home/m_blog');
+			
+	}
+
+		public function registerpage(){
+		if (isset($_POST['submit'])) {
+			$this->form_validation->set_rules('username','Username','required');
+			$this->form_validation->set_rules('password','Password','required');
+			
+			if ($this->form_validation->run() == TRUE) {
+				$nama = $this->input->post('nama');
+				$kodepos = $this->input->post('kodepos');
+				$email = $this->input->post('email');
+				$username = $this->input->post('username');
+				$password = md5($this->input->post('password'));
+			}
+			
+			$data = array(
+				'nama' => $nama,
+				'kodepos' => $kodepos,
+				'email' => $email,
+				'username' => $username,
+				'password' => $password,
+			);
+
+			$register_date = $this->db->set('register_date','NOW()',FALSE);
+			$this->db->insert('users',$data);
+			$this->session->set_userdata($data);
+			$this->session->set_flashdata("success","Your account has been registered");
+            redirect("home/registerpage","refresh");
+		}
+		$this->load->view('v_registrasi'); 
 	}
 	
+		public function loginpage()
+	{
+
+			$this->form_validation->set_rules('username','Username','required');
+			$this->form_validation->set_rules('password','Password','required');
+				
+			if ($this->form_validation->run() === FALSE) 
+			{
+				$this->load->view('v_login');
+			}
+				else 
+			{
+				$username = $this->input->post('username');
+				$password = $this->input->post('password');
+
+				$user_id = $this->m_users->login($username, $password);
+				if($user_id)
+
+				{
+					
+					$user_data = array(
+						'user_id' => $user_id,
+						'username' => $username,
+						'logged_in' => true
+					);
+					
+					$this->session->set_userdata($user_data);
+
+					// Set message
+					$this->session->set_flashdata('user_loggedin', 'You are now logged in');
+					// var_dump($user_data);
+					redirect("home/index1","Refresh");
+				}
+				else
+				{
+					$this->session->set_flashdata('login_failed', 'Login is invalid');
+
+					redirect("home/m_blog","Refresh");
+				}
+			}
+	}
+	public function logout()
+	{
+		// Unset user data
+        $this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('username');
+
+        // Set message
+        $this->session->set_flashdata('user_loggedout', 'Anda sudah log out');
+
+        redirect('home/loginpage');
+
+	}
 }

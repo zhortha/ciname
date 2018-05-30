@@ -55,9 +55,13 @@
 								<li><a href="#">Separated link</a></li>
 							</ul>
 						</li>
+						<?php if ($this->session->userdata('logged_in')) {?>
 					  <li class="active"><a href="<?php echo site_url('home/m_blog');?>">Blog</a></li>
 					  <li class="active"><a href="<?php echo site_url('home/tampil');?>">list</a></li>
 					  <li class="active"><a href="<?php echo site_url('kategori');?>">Kategori</a></li>
+					  <li><a href="<?php echo site_url('home/logout')?>"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+					  <?php }?>
+            </ul>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>
