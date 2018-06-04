@@ -197,23 +197,37 @@ class Home extends CI_Controller {
 				$username = $this->input->post('username');
 				$password = $this->input->post('password');
 
-				$user_id = $this->m_users->login($username, $password);
-				if($user_id)
-
-				{
-					
-					$user_data = array(
-						'user_id' => $user_id,
-						'username' => $username,
-						'logged_in' => true
-					);
+				$data['user'] = $this->m_users->login($username, $password);
+				foreach ($data['user'] as $check)
+			{
+					if($check!=false)
+				{	
+						$user_data = array
+						(
+							'user_id' => $check['user_id'],
+							'username' => $username,
+							'logged_in' => true,
+							'level' => $check['level']
+						);
 					
 					$this->session->set_userdata($user_data);
 
 					// Set message
 					$this->session->set_flashdata('user_loggedin', 'You are now logged in');
 					// var_dump($user_data);
-					redirect("home/index1","Refresh");
+					if ($check['level']=='1') 
+					{
+						redirect("home/index1","Refresh");
+					}
+					else if($check['level']=='2') 
+					{
+						redirect("home/tampil","refresh");
+					}
+					else 
+					{
+						redirect("home","refresh");
+					}
+
 				}
 				else
 				{
@@ -221,6 +235,7 @@ class Home extends CI_Controller {
 
 					redirect("home/m_blog","Refresh");
 				}
+			}
 			}
 	}
 	public function logout()

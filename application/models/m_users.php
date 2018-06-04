@@ -16,7 +16,7 @@ class M_users extends CI_Model{
         
         if($result->num_rows() == 1){
         
-            return $result->row(0)->user_id;
+            return $result->result_array();
         
         } else {
         
