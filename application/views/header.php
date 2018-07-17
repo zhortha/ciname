@@ -7,7 +7,7 @@
 		<title>Tri Nanda Satrio Purnomo</title>
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,6 +55,13 @@
 								<li><a href="#">Separated link</a></li>
 							</ul>
 						</li>
+				<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Management<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="<?php echo site_url('user/adduser')?>">Add User</a></li>
+                    <li><a href="<?php echo site_url('user/viewuser')?>">View User</a></li>
+                </ul>
+             	</li>
 						<?php if ($this->session->userdata('logged_in')) {?>
 					  <li class="active"><a href="<?php echo site_url('home/m_blog');?>">Blog</a></li>
 					  <li class="active"><a href="<?php echo site_url('home/tampil');?>">list</a></li>

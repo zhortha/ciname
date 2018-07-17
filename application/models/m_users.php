@@ -25,5 +25,22 @@ class M_users extends CI_Model{
         }
         
     }
-        
+    public function adduser($data,$table){
+         $this->db->insert("users", $data);
+     }
+ 
+    public function selectuser(){
+         $allUser = $this->db->query("select * from users");
+        return $allUser->result_array();
+     }
+ 
+    public function deleteuser($user_id, $nama)
+     {
+        $this->db->query("DELETE from users where user_id = ".$user_id);
+     }
+ 
+    public function getuserbyid($user_id){
+         $query = $this->db->query("SELECT * from users where user_id ='$user_id'");
+         return $query->result_array();
+    }
 }
